@@ -6,7 +6,6 @@
     <title>Yasser Mekhnach | Photographer</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
     <link rel="icon" type="image/png" href="new pfp.png">
 
     <style>
@@ -19,7 +18,7 @@
             background-color: #000000;
             min-height: 100vh;
             display: flex;
-            overflow: hidden; /* Prevent body scrolling to enable container-based scrolling */
+            overflow: hidden; 
         }
 
         /* Sidebar Navigation */
@@ -36,7 +35,7 @@
             justify-content: space-between;
             background-color: #000000;
             z-index: 100;
-            border-right: 1px solid #222; /* Add a subtle divider */
+            border-right: 1px solid #222; 
         }
         
         .branding h1 { 
@@ -79,7 +78,7 @@
             line-height: 1.6;
         }
 
-        /* Main Content Area - Modified for Horizontal Scrolling and Snapping */
+        /* Main Content Area */
         main { 
             margin-left: 280px; 
             width: calc(100% - 280px);
@@ -93,7 +92,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Gallery Sections - Each acts as a horizontal page */
         .collection { 
             flex: 0 0 100%;
             width: 100%;
@@ -101,25 +99,22 @@
             padding: 40px 40px 60px 40px; 
             box-sizing: border-box;
             scroll-snap-align: start;
-            overflow-y: auto; /* Enable internal vertical scrolling for grids */
+            overflow-y: auto; 
         }
 
-        /* Ensure sections are spaced apart on mobile without a scrollbar */
         @media (min-width: 901px) {
-            .collection {
-                padding-right: 0px; 
-            }
+            .collection { padding-right: 0px; }
         }
         
         .section-title { 
             font-family: 'Playfair Display', serif;
-            display: none; /* Hidden to match the reference image's clean look */
+            display: none; 
         }
 
-        /* 2-Column Grid matching the screenshot */
+        /* 2-Column Grid */
         .grid { 
             column-count: 2;
-            column-gap: 30px; /* Tighter gap to maximize image size */
+            column-gap: 30px; 
         }
 
         .grid-item { 
@@ -139,7 +134,7 @@
             opacity: 0.8; 
         }
 
-        /* Profile Picture Styling - Adapted for New Page */
+        /* Profile Picture Styling */
         .profile-section {
             display: flex;
             align-items: center;
@@ -167,23 +162,34 @@
             max-width: 500px; 
         }
 
-        /* Contact Page Styling */
-        .contact-content h2 {
+        /* New Contact Layout */
+        .contact-layout {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        .contact-info h2 {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin: 0 0 20px 0;
         }
-        .contact-content ul {
+        .contact-info ul {
             list-style: none;
             padding: 0;
             margin: 0;
             font-size: 14px;
             color: #aaa;
             line-height: 1.8;
-            max-width: 500px;
         }
-        .contact-content li strong {
+        .contact-info li strong {
             color: #fff;
             text-transform: uppercase;
             font-size: 12px;
@@ -192,7 +198,57 @@
             width: 100px; 
         }
 
-        /* Lightbox Styles (Preserved and Adjusted to Cover Whole Screen) */
+        /* Contact Form Styling */
+        .contact-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        .contact-form-group {
+            border: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form-group input,
+        .contact-form-group textarea {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #444;
+            color: #fff;
+            padding: 15px 20px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+        .contact-form-group input::placeholder,
+        .contact-form-group textarea::placeholder {
+            color: #888;
+        }
+        .contact-form-group textarea {
+            border-bottom: none;
+            min-height: 120px;
+            resize: vertical;
+        }
+        .contact-form button {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 12px 24px;
+            cursor: pointer;
+            align-self: flex-start;
+            margin-top: 20px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .contact-form button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Lightbox Styles */
         .lightbox {
             display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; 
             background-color: rgba(0,0,0,0.98); 
@@ -200,7 +256,7 @@
             opacity: 0; transition: opacity 0.3s ease;
         }
         .lightbox.show { display: flex; opacity: 1; }
-        .lightbox-content { max-width: 98%; max-height: 95vh; object-fit: contain; } /* Increased to take up almost the entire screen */
+        .lightbox-content { max-width: 98%; max-height: 95vh; object-fit: contain; } 
         .lightbox-caption { margin-top: 1.5rem; color: #888; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
         .lightbox-close { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 40px; cursor: pointer; transition: color 0.3s; }
         .lightbox-close:hover { color: #888; }
@@ -227,16 +283,14 @@
                 height: auto; 
                 scroll-snap-align: none; 
                 overflow: visible;
-                display: block; /* Ensure stacked order on mobile */
+                display: block; 
                 margin-bottom: 20px;
                 border-bottom: 1px solid #222;
             }
             .grid { column-count: 1; }
             .profile-section { flex-direction: column; gap: 20px; text-align: center; }
             .profile-pic { width: 150px; height: 150px; }
-            .aboutme-content p, .contact-content ul { max-width: 100%; }
-            
-            /* Remove dividers between mobile sections, they are on borders now */
+            .aboutme-content p, .contact-info ul { max-width: 100%; }
             .collection { border: none; padding-bottom: 0px; margin-bottom: 0px;}
         }
     </style>
@@ -308,15 +362,28 @@
                     <p>17 year old photographer based in Montreal, QC, Canada. Currently working for Vanier College's Photography Club.</p>
                 </div>
             </div>
-            <div class="contact-content">
-                <h2>Contact & Info</h2>
-                <ul>
-                    <li><strong>Email:</strong> yassermekhnach@email.com</li>
-                    <li><strong>Instagram:</strong> @yassermekhnach.photo</li>
-                    <li><strong>Phone:</strong> +1 (514) 123-4567</li>
-                    <li><strong>Based In:</strong> Montreal, QC, Canada</li>
-                    <li><strong>Available For:</strong> Events, Portraits, Prints</li>
-                </ul>
+            
+            <div class="contact-layout">
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+                    <ul>
+                        <li><strong>Email:</strong> yassermekhnach@email.com</li>
+                        <li><strong>Instagram:</strong> @yassermekhnach.photo</li>
+                        <li><strong>Phone:</strong> +1 (514) 123-4567</li>
+                        <li><strong>Based In:</strong> Montreal, QC, Canada</li>
+                        <li><strong>Available For:</strong> Events, Portraits, Prints</li>
+                    </ul>
+                </div>
+
+                <form action="https://formsubmit.co/mekhnachyasser@gmail.com" method="POST" class="contact-form">
+                    <div class="contact-form-group">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="message" placeholder="Message" required></textarea>
+                    </div>
+                    <input type="hidden" name="_captcha" value="false">
+                    <button type="submit">Send Message</button>
+                </form>
             </div>
         </section>
     </main>
@@ -330,19 +397,13 @@
     </div>
 
     <script>
-        // Main container for all sections
         const mainContent = document.querySelector('main');
 
         function showSection(sectionId) {
-            // Get the target section element
             const targetSection = document.getElementById(sectionId);
 
-            // Scroll the main content horizontally to bring the target section into view
-            // behavior: 'smooth' provides the animating effect
-            // inline: 'start' aligns the left edge of the section with the left edge of the main container
             targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
             
-            // Update active state in sidebar navigation
             document.querySelectorAll('#nav-menu a').forEach(link => {
                 link.classList.remove('active');
                 if(link.getAttribute('data-target') === sectionId) {
@@ -360,12 +421,10 @@
             document.getElementById('lightbox-img').src = imgSrc;
             document.getElementById('lightbox-caption').textContent = dateText || 'Date Unknown';
             
-            // Build gallery array for next/prev using any image that has data-date
             const allImages = Array.from(document.querySelectorAll('img[data-date]'));
             const clickedImg = allImages.find(img => img.src === imgSrc || imgSrc.endsWith(img.getAttribute('src')));
             
             if (clickedImg) {
-                // Find all images within the current viewing section
                 currentImages = Array.from(clickedImg.closest('.collection').querySelectorAll('img[data-date]'));
                 currentIndex = currentImages.indexOf(clickedImg);
             } else {
@@ -381,7 +440,6 @@
 
             currentIndex += direction;
             
-            // Loop back
             if (currentIndex < 0) currentIndex = currentImages.length - 1;
             else if (currentIndex >= currentImages.length) currentIndex = 0;
 
