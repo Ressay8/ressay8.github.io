@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography Portfolio</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-	<link rel="icon" type="image/png" href="new pfp.png">
-	
+    <!-- Favicon link added here -->
+    <link rel="icon" type="image/png" href="new pfp.png">
+
     <style>
         /* Base Minimalist Styling */
         body { 
@@ -31,7 +35,7 @@
             top: 0; 
             z-index: 100; 
         }
-        .logo { font-size: 1.25rem; font-weight: 600; text-decoration: none; color: #fff; letter-spacing: -0.5px; cursor: pointer; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: #fff; letter-spacing: 0; cursor: pointer; }
         nav a { margin-left: 2rem; text-decoration: none; color: #aaa; font-size: 0.9rem; transition: color 0.3s; cursor: pointer; }
         nav a:hover { color: #fff; }
 
@@ -40,13 +44,13 @@
         .profile-pic {
             width: 150px;
             height: 150px;
-            border-radius: 50%; /* Makes the image a perfect circle */
+            border-radius: 50%; 
             object-fit: cover;
             margin: 0 auto 2rem auto;
             display: block;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-        .hero h1 { font-size: 3rem; font-weight: 300; margin-bottom: 1rem; letter-spacing: -1px; color: #fff; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: #fff; letter-spacing: 0; }
         .hero p { color: #ccc; font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
         /* Home Page Covers */
@@ -84,7 +88,7 @@
             padding: 2rem;
             color: #fff;
         }
-        .cover-overlay h3 { margin: 0 0 0.5rem 0; font-size: 2rem; font-weight: 300; }
+        .cover-overlay h3 { font-family: 'Playfair Display', serif; margin: 0 0 0.5rem 0; font-size: 2.5rem; font-weight: 700; }
         .cover-overlay span { font-size: 0.9rem; color: #aaa; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
         .cover-card:hover .cover-overlay span { opacity: 1; transform: translateY(0); }
 
@@ -102,7 +106,7 @@
         /* Gallery Sections */
         .collection { display: none; /* Hidden by default */ padding: 4rem 5%; }
         #home { display: block; /* Show home by default */ }
-        .section-title { font-size: 1.5rem; font-weight: 400; margin-bottom: 2rem; color: #fff; text-align: center; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 2rem; color: #fff; text-align: center; }
         
         /* Photo Grid */
         .grid { 
@@ -132,6 +136,53 @@
             transition: transform 0.6s ease; 
         }
         .grid-item:hover img { transform: scale(1.04); }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none; 
+            position: fixed; 
+            z-index: 999; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.95); 
+            backdrop-filter: blur(10px);
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .lightbox-caption {
+            margin-top: 1.5rem;
+            color: #ccc;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .lightbox-close:hover { color: #aaa; }
+        .grid-item { cursor: pointer; }
 
         /* Footer */
         footer { text-align: center; padding: 4rem 5%; color: #888; font-size: 0.85rem; }
@@ -182,21 +233,21 @@
         <section id="quebec" class="collection">
             <h2 class="section-title">Quebec Collection</h2>
             <div class="grid">
-                <div class="grid-item"><img src="quebec-1 (1).jpg" alt="Quebec shot 1"></div>
-				<div class="grid-item"><img src="quebec-1 (2).jpg" alt="Quebec shot 1"></div>
-                <div class="grid-item"><img src="quebec-2.jpg" alt="Quebec shot 2"></div>
-                <div class="grid-item"><img src="quebec-1 (3).jpg" alt="Quebec shot 3"></div>
-                <div class="grid-item"><img src="quebec-1 (4).jpg" alt="Quebec shot 4"></div>
-                <div class="grid-item"><img src="quebec-1 (5).jpg" alt="Quebec shot 5"></div>
-                <div class="grid-item"><img src="quebec-1 (6).jpg" alt="Quebec shot 6"></div>
-                <div class="grid-item"><img src="quebec-1 (7).jpg" alt="Quebec shot 7"></div>
-                <div class="grid-item"><img src="quebec-1 (8).jpg" alt="Quebec shot 8"></div>
-                <div class="grid-item"><img src="quebec-1 (9).jpg" alt="Quebec shot 9"></div>
-                <div class="grid-item"><img src="quebec-1 (10).jpg" alt="Quebec shot 10"></div>
-                <div class="grid-item"><img src="quebec-1 (11).jpg" alt="Quebec shot 11"></div>
-                <div class="grid-item"><img src="quebec-1 (12).jpg" alt="Quebec shot 12"></div>
-                <div class="grid-item"><img src="quebec-1 (13).jpg" alt="Quebec shot 13"></div>
-				<div class="grid-item"><img src="quebec-14.jpg" alt="Quebec shot 14"></div>
+                <div class="grid-item"><img src="quebec-1 (1).jpg" alt="Quebec shot 1" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-2.jpg" alt="Quebec shot 2" data-date="April 24, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (3).jpg" alt="Quebec shot 3" data-date="April 24, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (4).jpg" alt="Quebec shot 4" data-date="April 24, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (5).jpg" alt="Quebec shot 5" data-date="March 8, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (6).jpg" alt="Quebec shot 6" data-date="March 8, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (7).jpg" alt="Quebec shot 7" data-date="March 8, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (8).jpg" alt="Quebec shot 8" data-date="March 8, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (9).jpg" alt="Quebec shot 9" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (10).jpg" alt="Quebec shot 10" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (11).jpg" alt="Quebec shot 11" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (12).jpg" alt="Quebec shot 12" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (13).jpg" alt="Quebec shot 13" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+		        <div class="grid-item"><img src="quebec-14.jpg" alt="Quebec shot 14" data-date="March 8, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (2).jpg" alt="Quebec shot 15" data-date="March 7, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
             </div>
         </section>
 
@@ -204,20 +255,27 @@
         <section id="ontario" class="collection">
             <h2 class="section-title">Ontario Collection</h2>
             <div class="grid">
-                <div class="grid-item"><img src="ontario-1.jpg" alt="Ontario shot 1"></div>
-                <div class="grid-item"><img src="ontario-2.jpg" alt="Ontario shot 2"></div>
-                <div class="grid-item"><img src="ontario-3.jpg" alt="Ontario shot 3"></div>
-                <div class="grid-item"><img src="ontario-4.jpg" alt="Ontario shot 4"></div>
-                <div class="grid-item"><img src="ontario-5.jpg" alt="Ontario shot 5"></div>
-				<div class="grid-item"><img src="ontario-6.jpg" alt="Ontario shot 6"></div>
-                <div class="grid-item"><img src="ontario-7.jpg" alt="Ontario shot 7"></div>
-                <div class="grid-item"><img src="ontario-8.jpg" alt="Ontario shot 9"></div>
-                <div class="grid-item"><img src="ontario-9.jpg" alt="Ontario shot 8"></div>
-                <div class="grid-item"><img src="ontario-10.jpg" alt="Ontario shot 10"></div>
-				<div class="grid-item"><img src="ontario-11.jpg" alt="Ontario shot 11"></div>
+                <div class="grid-item"><img src="ontario-1.jpg" alt="Ontario shot 1" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-2.jpg" alt="Ontario shot 2" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-3.jpg" alt="Ontario shot 3" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-4.jpg" alt="Ontario shot 4" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-5.jpg" alt="Ontario shot 5" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-6.jpg" alt="Ontario shot 6" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-7.jpg" alt="Ontario shot 7" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-8.jpg" alt="Ontario shot 8" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-9.jpg" alt="Ontario shot 9" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-10.jpg" alt="Ontario shot 10" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-11.jpg" alt="Ontario shot 11" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
             </div>
         </section>
     </main>
+
+    <!-- Lightbox UI Elements -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <img id="lightbox-img" class="lightbox-content">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
 
     <footer>
         &copy; 2026 Yasser Mekhnach. All rights reserved.
@@ -259,9 +317,24 @@
                 });
             }
         }
+
+        // Lightbox Functions
+        function openLightbox(imgSrc, dateText) {
+            const lightbox = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-caption').textContent = dateText || 'Date Unknown';
+            lightbox.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevents background scrolling while viewing
+        }
+
+        function closeLightbox(e) {
+            // Only close if clicking the background or the X button
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('show');
+                document.body.style.overflow = 'auto'; // Restores scrolling
+            }
+        }
     </script>
 
 </body>
-
 </html>
-
