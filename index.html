@@ -139,32 +139,6 @@
             opacity: 0.8; 
         }
 
-        /* Home Page Covers */
-        .home-covers {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px; /* Tighter gap */
-        }
-        .cover-card {
-            cursor: pointer;
-            position: relative;
-        }
-        .cover-card img {
-            width: 100%;
-            aspect-ratio: 4/5;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
-        }
-        .cover-card:hover img { opacity: 0.8; }
-        .cover-title {
-            margin-top: 15px;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #888;
-            letter-spacing: 0.5px;
-        }
-
         /* Profile Picture Styling - Adapted for New Page */
         .profile-section {
             display: flex;
@@ -258,7 +232,6 @@
                 border-bottom: 1px solid #222;
             }
             .grid { column-count: 1; }
-            .home-covers { grid-template-columns: 1fr; }
             .profile-section { flex-direction: column; gap: 20px; text-align: center; }
             .profile-pic { width: 150px; height: 150px; }
             .aboutme-content p, .contact-content ul { max-width: 100%; }
@@ -277,11 +250,9 @@
         </div>
         
         <nav id="nav-menu">
-            <a onclick="showSection('home')" class="active" data-target="home">Home</a>
-            <a onclick="showSection('aboutme')" data-target="aboutme">About Me</a>
-            <a onclick="showSection('contact')" data-target="contact">Contact</a>
-            <a onclick="showSection('quebec')" data-target="quebec">Quebec</a>
+            <a onclick="showSection('quebec')" class="active" data-target="quebec">Quebec</a>
             <a onclick="showSection('ontario')" data-target="ontario">Ontario</a>
+            <a onclick="showSection('about-contact')" data-target="about-contact">About / Contact</a>
         </nav>
 
         <div class="sidebar-footer">
@@ -291,50 +262,6 @@
     </aside>
 
     <main>
-        <section id="home" class="collection">
-            <div class="home-covers">
-                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                    <img src="quebec-1 (6).jpg" alt="Quebec shot 6" data-date="March 8, 2026">
-                    <div class="cover-title">March 8, 2026</div>
-                </div>
-                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                    <img src="ontario-5.jpg" alt="Ontario shot 5" data-date="June 20, 2025">
-                    <div class="cover-title">June 20, 2025</div>
-                </div>
-                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                    <img src="quebec-1 (11).jpg" alt="Quebec shot 11" data-date="June 18, 2025">
-                    <div class="cover-title">June 18, 2025</div>
-                </div>
-                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                    <img src="ontario-10.jpg" alt="Ontario shot 10" data-date="June 20, 2025">
-                    <div class="cover-title">June 20, 2025</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="aboutme" class="collection">
-            <div class="profile-section">
-                <img src="20250620-DSC_1250(1).jpg" alt="Profile Picture" class="profile-pic">
-                <div class="aboutme-content">
-                    <h2>About Me</h2>
-                    <p>17 year old photographer based in Montreal, QC, Canada. Currently working for Vanier College's Photography Club.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="collection">
-            <div class="contact-content">
-                <h2>Contact & Info</h2>
-                <ul>
-                    <li><strong>Email:</strong> yassermekhnach@email.com</li>
-                    <li><strong>Instagram:</strong> @yassermekhnach.photo</li>
-                    <li><strong>Phone:</strong> +1 (514) 123-4567</li>
-                    <li><strong>Based In:</strong> Montreal, QC, Canada</li>
-                    <li><strong>Available For:</strong> Events, Portraits, Prints</li>
-                </ul>
-            </div>
-        </section>
-
         <section id="quebec" class="collection">
             <h2 class="section-title">Quebec</h2>
             <div class="grid">
@@ -370,6 +297,26 @@
                 <div class="grid-item"><img src="ontario-9.jpg" alt="Ontario shot 9" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="ontario-10.jpg" alt="Ontario shot 10" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="ontario-11.jpg" alt="Ontario shot 11" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+            </div>
+        </section>
+
+        <section id="about-contact" class="collection">
+            <div class="profile-section">
+                <img src="20250620-DSC_1250(1).jpg" alt="Profile Picture" class="profile-pic">
+                <div class="aboutme-content">
+                    <h2>About Me</h2>
+                    <p>17 year old photographer based in Montreal, QC, Canada. Currently working for Vanier College's Photography Club.</p>
+                </div>
+            </div>
+            <div class="contact-content">
+                <h2>Contact & Info</h2>
+                <ul>
+                    <li><strong>Email:</strong> yassermekhnach@email.com</li>
+                    <li><strong>Instagram:</strong> @yassermekhnach.photo</li>
+                    <li><strong>Phone:</strong> +1 (514) 123-4567</li>
+                    <li><strong>Based In:</strong> Montreal, QC, Canada</li>
+                    <li><strong>Available For:</strong> Events, Portraits, Prints</li>
+                </ul>
             </div>
         </section>
     </main>
@@ -418,7 +365,7 @@
             const clickedImg = allImages.find(img => img.src === imgSrc || imgSrc.endsWith(img.getAttribute('src')));
             
             if (clickedImg) {
-                // Find all images within the current viewing section (home, aboutme, contact, quebec, or ontario)
+                // Find all images within the current viewing section
                 currentImages = Array.from(clickedImg.closest('.collection').querySelectorAll('img[data-date]'));
                 currentIndex = currentImages.indexOf(clickedImg);
             } else {
@@ -426,7 +373,6 @@
             }
 
             lightbox.classList.add('show');
-            // document.body.style.overflow = 'hidden'; // Body scrolling is already disabled
         }
 
         function changeLightboxImage(direction, event) {
@@ -447,7 +393,6 @@
         function closeLightbox(e) {
             if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
                 document.getElementById('lightbox').classList.remove('show');
-                // document.body.style.overflow = 'auto'; // Restores scrolling is not needed as it's handled differently
             }
         }
 
