@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yasser Mekhnach | Photographer</title>
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="new pfp.png">
 
     <style>
@@ -21,6 +19,7 @@
             background-color: #000000;
             min-height: 100vh;
             display: flex;
+            overflow: hidden; /* Prevent body scrolling to enable container-based scrolling */
         }
 
         /* Sidebar Navigation */
@@ -37,6 +36,7 @@
             justify-content: space-between;
             background-color: #000000;
             z-index: 100;
+            border-right: 1px solid #222; /* Add a subtle divider */
         }
         
         .branding h1 { 
@@ -79,47 +79,41 @@
             line-height: 1.6;
         }
 
-        /* Main Content Area */
+        /* Main Content Area - Modified for Horizontal Scrolling and Snapping */
         main { 
             margin-left: 280px; 
-            padding: 40px 40px 60px 40px; /* Adjusted padding to let images sit closer to the top */
             width: calc(100% - 280px);
+            height: 100vh;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
         }
 
-        /* Gallery Sections */
-        .collection { display: none; }
-        #home { display: block; }
+        /* Gallery Sections - Each acts as a horizontal page */
+        .collection { 
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            padding: 40px 40px 60px 40px; 
+            box-sizing: border-box;
+            scroll-snap-align: start;
+            overflow-y: auto; /* Enable internal vertical scrolling for grids */
+        }
+
+        /* Ensure sections are spaced apart on mobile without a scrollbar */
+        @media (min-width: 901px) {
+            .collection {
+                padding-right: 0px; 
+            }
+        }
         
         .section-title { 
             font-family: 'Playfair Display', serif;
             display: none; /* Hidden to match the reference image's clean look */
-        }
-
-        /* Home Page Styling adapted to new layout */
-        .home-content {
-            width: 100%; /* Removed max-width restriction so images stretch fully */
-        }
-        .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 30px;
-            filter: grayscale(100%); /* Adds a nice touch for the stark theme */
-        }
-        .home-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .home-content p {
-            font-size: 14px;
-            color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 60px; /* Extra breathing room before the massive photos */
-            max-width: 500px; /* Keeps text readable while images expand */
         }
 
         /* 2-Column Grid matching the screenshot */
@@ -145,7 +139,7 @@
             opacity: 0.8; 
         }
 
-        /* Collection Covers on Home Page */
+        /* Home Page Covers */
         .home-covers {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -171,7 +165,60 @@
             letter-spacing: 0.5px;
         }
 
-        /* Lightbox Styles */
+        /* Profile Picture Styling - Adapted for New Page */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(100%); 
+        }
+        .aboutme-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+        }
+        .aboutme-content p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 500px; 
+        }
+
+        /* Contact Page Styling */
+        .contact-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .contact-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+        .contact-content li strong {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            display: inline-block;
+            width: 100px; 
+        }
+
+        /* Lightbox Styles (Preserved and Adjusted to Cover Whole Screen) */
         .lightbox {
             display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; 
             background-color: rgba(0,0,0,0.98); 
@@ -194,15 +241,30 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 900px) {
-            body { flex-direction: column; }
+            body { flex-direction: column; overflow: auto; }
             aside { 
                 position: relative; width: 100%; height: auto; padding: 30px 20px; 
                 border-bottom: 1px solid #222; z-index: 10;
             }
             nav { margin-top: 30px; flex-direction: row; gap: 20px; flex-wrap: wrap; }
-            main { margin-left: 0; width: 100%; padding: 30px 20px; }
+            main { margin-left: 0; width: 100%; height: auto; padding: 0; display: block; overflow: visible; scroll-snap-type: none; }
+            .collection { 
+                padding: 30px 20px; 
+                height: auto; 
+                scroll-snap-align: none; 
+                overflow: visible;
+                display: block; /* Ensure stacked order on mobile */
+                margin-bottom: 20px;
+                border-bottom: 1px solid #222;
+            }
             .grid { column-count: 1; }
             .home-covers { grid-template-columns: 1fr; }
+            .profile-section { flex-direction: column; gap: 20px; text-align: center; }
+            .profile-pic { width: 150px; height: 150px; }
+            .aboutme-content p, .contact-content ul { max-width: 100%; }
+            
+            /* Remove dividers between mobile sections, they are on borders now */
+            .collection { border: none; padding-bottom: 0px; margin-bottom: 0px;}
         }
     </style>
 </head>
@@ -216,6 +278,8 @@
         
         <nav id="nav-menu">
             <a onclick="showSection('home')" class="active" data-target="home">Home</a>
+            <a onclick="showSection('aboutme')" data-target="aboutme">About Me</a>
+            <a onclick="showSection('contact')" data-target="contact">Contact</a>
             <a onclick="showSection('quebec')" data-target="quebec">Quebec</a>
             <a onclick="showSection('ontario')" data-target="ontario">Ontario</a>
         </nav>
@@ -227,40 +291,54 @@
     </aside>
 
     <main>
-        <!-- Home / Overview -->
         <section id="home" class="collection">
-            <div class="home-content">
-                <img src="20250620-DSC_1250(1).jpg" alt="Profile Picture" class="profile-pic">
-                <h2>Overview</h2>
-                <p>17 year old photographer based in Montreal, QC, Canada. Currently working for Vanier College's Photography Club.</p>
-                
-                <!-- Random Selections Grid -->
-                <div class="home-covers">
-                    <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                        <img src="quebec-1 (6).jpg" alt="Quebec shot 6" data-date="March 8, 2026">
-                        <div class="cover-title">March 8, 2026</div>
-                    </div>
-                    <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                        <img src="ontario-5.jpg" alt="Ontario shot 5" data-date="June 20, 2025">
-                        <div class="cover-title">June 20, 2025</div>
-                    </div>
-                    <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                        <img src="quebec-1 (11).jpg" alt="Quebec shot 11" data-date="June 18, 2025">
-                        <div class="cover-title">June 18, 2025</div>
-                    </div>
-                    <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
-                        <img src="ontario-10.jpg" alt="Ontario shot 10" data-date="June 20, 2025">
-                        <div class="cover-title">June 20, 2025</div>
-                    </div>
+            <div class="home-covers">
+                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
+                    <img src="quebec-1 (6).jpg" alt="Quebec shot 6" data-date="March 8, 2026">
+                    <div class="cover-title">March 8, 2026</div>
+                </div>
+                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
+                    <img src="ontario-5.jpg" alt="Ontario shot 5" data-date="June 20, 2025">
+                    <div class="cover-title">June 20, 2025</div>
+                </div>
+                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
+                    <img src="quebec-1 (11).jpg" alt="Quebec shot 11" data-date="June 18, 2025">
+                    <div class="cover-title">June 18, 2025</div>
+                </div>
+                <div class="cover-card" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').getAttribute('data-date'))">
+                    <img src="ontario-10.jpg" alt="Ontario shot 10" data-date="June 20, 2025">
+                    <div class="cover-title">June 20, 2025</div>
                 </div>
             </div>
         </section>
 
-        <!-- Quebec Gallery -->
+        <section id="aboutme" class="collection">
+            <div class="profile-section">
+                <img src="20250620-DSC_1250(1).jpg" alt="Profile Picture" class="profile-pic">
+                <div class="aboutme-content">
+                    <h2>About Me</h2>
+                    <p>17 year old photographer based in Montreal, QC, Canada. Currently working for Vanier College's Photography Club.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="collection">
+            <div class="contact-content">
+                <h2>Contact & Info</h2>
+                <ul>
+                    <li><strong>Email:</strong> yassermekhnach@email.com</li>
+                    <li><strong>Instagram:</strong> @yassermekhnach.photo</li>
+                    <li><strong>Phone:</strong> +1 (514) 123-4567</li>
+                    <li><strong>Based In:</strong> Montreal, QC, Canada</li>
+                    <li><strong>Available For:</strong> Events, Portraits, Prints</li>
+                </ul>
+            </div>
+        </section>
+
         <section id="quebec" class="collection">
             <h2 class="section-title">Quebec</h2>
             <div class="grid">
-                 <div class="grid-item"><img src="quebec-1 (1).jpg" alt="Quebec shot 1" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-1 (1).jpg" alt="Quebec shot 1" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="quebec-2.jpg" alt="Quebec shot 2" data-date="April 24, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="quebec-1 (3).jpg" alt="Quebec shot 3" data-date="April 24, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="quebec-1 (4).jpg" alt="Quebec shot 4" data-date="April 24, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
@@ -273,16 +351,15 @@
                 <div class="grid-item"><img src="quebec-1 (11).jpg" alt="Quebec shot 11" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="quebec-1 (12).jpg" alt="Quebec shot 12" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="quebec-1 (13).jpg" alt="Quebec shot 13" data-date="June 18, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
-		        <div class="grid-item"><img src="quebec-14.jpg" alt="Quebec shot 14" data-date="March 8, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="quebec-14.jpg" alt="Quebec shot 14" data-date="March 8, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="quebec-1 (2).jpg" alt="Quebec shot 15" data-date="March 7, 2026" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
             </div>
         </section>
 
-        <!-- Ontario Gallery -->
         <section id="ontario" class="collection">
             <h2 class="section-title">Ontario</h2>
             <div class="grid">
-                 <div class="grid-item"><img src="ontario-1.jpg" alt="Ontario shot 1" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
+                <div class="grid-item"><img src="ontario-1.jpg" alt="Ontario shot 1" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="ontario-2.jpg" alt="Ontario shot 2" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="ontario-3.jpg" alt="Ontario shot 3" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
                 <div class="grid-item"><img src="ontario-4.jpg" alt="Ontario shot 4" data-date="June 20, 2025" onclick="openLightbox(this.src, this.getAttribute('data-date'))"></div>
@@ -297,7 +374,6 @@
         </section>
     </main>
 
-    <!-- Lightbox UI Elements -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
         <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
         <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1, event)">&#10094;</span>
@@ -306,16 +382,18 @@
         <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
 
-    <!-- JavaScript -->
     <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.collection').forEach(section => {
-                section.style.display = 'none';
-            });
+        // Main container for all sections
+        const mainContent = document.querySelector('main');
 
-            // Show target section
-            document.getElementById(sectionId).style.display = 'block';
+        function showSection(sectionId) {
+            // Get the target section element
+            const targetSection = document.getElementById(sectionId);
+
+            // Scroll the main content horizontally to bring the target section into view
+            // behavior: 'smooth' provides the animating effect
+            // inline: 'start' aligns the left edge of the section with the left edge of the main container
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
             
             // Update active state in sidebar navigation
             document.querySelectorAll('#nav-menu a').forEach(link => {
@@ -324,9 +402,6 @@
                     link.classList.add('active');
                 }
             });
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // --- Lightbox Functions ---
@@ -343,7 +418,7 @@
             const clickedImg = allImages.find(img => img.src === imgSrc || imgSrc.endsWith(img.getAttribute('src')));
             
             if (clickedImg) {
-                // Find all images within the current viewing section (home, quebec, or ontario)
+                // Find all images within the current viewing section (home, aboutme, contact, quebec, or ontario)
                 currentImages = Array.from(clickedImg.closest('.collection').querySelectorAll('img[data-date]'));
                 currentIndex = currentImages.indexOf(clickedImg);
             } else {
@@ -351,7 +426,7 @@
             }
 
             lightbox.classList.add('show');
-            document.body.style.overflow = 'hidden'; 
+            // document.body.style.overflow = 'hidden'; // Body scrolling is already disabled
         }
 
         function changeLightboxImage(direction, event) {
@@ -372,7 +447,7 @@
         function closeLightbox(e) {
             if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
                 document.getElementById('lightbox').classList.remove('show');
-                document.body.style.overflow = 'auto'; 
+                // document.body.style.overflow = 'auto'; // Restores scrolling is not needed as it's handled differently
             }
         }
 
